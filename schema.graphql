@@ -161,7 +161,7 @@ type ModuleGlobalsTreasurySet @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type NewCollectionCreated @entity(immutable: true) {
+type NewCollectionCreated @entity {
   id: Bytes!
   collectionOwner: Bytes! # address
   derivedCollectionAddr: Bytes! # address
@@ -176,18 +176,29 @@ type NewCollectionCreated @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  items: BigInt!
+  nfts: [NewNFTCreated!]! @derivedFrom(field: "collection")
 }
 
-type NewNFTCreated @entity(immutable: true) {
+type NewNFTCreated @entity {
   id: Bytes!
   tokenId: BigInt! # uint256
   collectionId: BigInt! # uint256
   derivedFrom: BigInt! # uint256
-  creator: Bytes! # address
+  creator: Creator! # address
   nftInfoURI: String! # string
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  collection: NewCollectionCreated!
+}
+
+type Creator @entity {
+  id: Bytes!
+  address: Bytes!
+  itemsCollection: BigInt!
+  itemsNFT: BigInt!
+  nfts: [NewNFTCreated!]! @derivedFrom(field: "creator")
 }
 
 type RoyaltyDataSet @entity(immutable: true) {

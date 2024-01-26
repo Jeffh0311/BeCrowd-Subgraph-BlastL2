@@ -1,3 +1,4 @@
+import { Address, Bytes, BigInt } from "@graphprotocol/graph-ts"
 import {
   BaseInitialized as BaseInitializedEvent,
   BurnNFTFromCollection as BurnNFTFromCollectionEvent,
@@ -28,6 +29,7 @@ import {
   ClaimStakeEth,
   ClaimYieldAndGas,
   CreateCollectionStakeEthAmountSet,
+  Creator,
   DerivedNFTInitialized,
   DerivedRuleModuleWhitelisted,
   EmergencyAdminSet,
@@ -65,6 +67,23 @@ export function handleBaseInitialized(event: BaseInitializedEvent): void {
 export function handleBurnNFTFromCollection(
   event: BurnNFTFromCollectionEvent
 ): void {
+  let nft = NewNFTCreated.load(Bytes.fromUint8Array(event.params.collectionId).concat(Bytes.fromUint8Array(event.params.nftId)))
+  if(nft != null){
+    nft.nftInfoURI = ""
+    nft.creator = Address.zero()
+    nft.blockNumber = event.block.number
+    nft.blockTimestamp = event.block.timestamp
+    nft.transactionHash = event.transaction.hash
+    nft.save()
+    // store.remove('NewNFTCreated', Bytes.fromUint8Array(event.params.collectionId).concat(Bytes.fromUint8Array(event.params.nftId)).toHexString());
+  }
+
+  let collection = NewCollectionCreated.load(Bytes.fromUint8Array(event.params.collectionId))
+  if (collection != null) {  
+    collection.items = collection.items.minus(BigInt.fromI32(1))
+    collection.save()
+  }
+
   let entity = new BurnNFTFromCollection(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
@@ -314,7 +333,7 @@ export function handleNewCollectionCreated(
   event: NewCollectionCreatedEvent
 ): void {
   let entity = new NewCollectionCreated(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
+    Bytes.fromUint8Array(event.params.collectionId)
   )
   entity.collectionOwner = event.params.collectionOwner
   entity.derivedCollectionAddr = event.params.derivedCollectionAddr
@@ -326,6 +345,7 @@ export function handleNewCollectionCreated(
   entity.mintPrice = event.params.mintPrice
   entity.whiteListRootHash = event.params.whiteListRootHash
   entity.collInfoURI = event.params.collInfoURI
+  entity.items = BigInt.fromI32(0);
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -335,18 +355,41 @@ export function handleNewCollectionCreated(
 }
 
 export function handleNewNFTCreated(event: NewNFTCreatedEvent): void {
+
+  let account = Creator.load(event.params.creator)
+
+  if (account == null) {
+    account = new Creator(
+      event.params.creator
+    )
+    account.address = event.params.creator
+    account.itemsNFT = BigInt.fromI32(1);
+  }else{
+    account.itemsNFT = account.itemsNFT.plus(BigInt.fromI32(1));
+  }
+  account.save()
+
+  let collection = NewCollectionCreated.load(Bytes.fromUint8Array(event.params.collectionId))
+
+  if (collection == null) {
+    return
+  }
+  collection.items = collection.items.plus(BigInt.fromI32(1))
+  collection.save()
+
   let entity = new NewNFTCreated(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
+    Bytes.fromUint8Array(event.params.collectionId).concat(Bytes.fromUint8Array(event.params.tokenId))
   )
   entity.tokenId = event.params.tokenId
   entity.collectionId = event.params.collectionId
   entity.derivedFrom = event.params.derivedFrom
-  entity.creator = event.params.creator
+  entity.creator = account.id
   entity.nftInfoURI = event.params.nftInfoURI
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
+  entity.collection = collection.id
 
   entity.save()
 }
