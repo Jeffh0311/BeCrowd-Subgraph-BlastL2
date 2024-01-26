@@ -1,0 +1,234 @@
+type BaseInitialized @entity(immutable: true) {
+  id: Bytes!
+  name: String! # string
+  symbol: String! # string
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BurnNFTFromCollection @entity(immutable: true) {
+  id: Bytes!
+  collectionId: BigInt! # uint256
+  nftId: BigInt! # uint256
+  burner: Bytes! # address
+  owner: Bytes! # address
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ClaimStakeEth @entity(immutable: true) {
+  id: Bytes!
+  staker: Bytes! # address
+  claimAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ClaimYieldAndGas @entity(immutable: true) {
+  id: Bytes!
+  contractAddr: Bytes! # address
+  claimableYield: BigInt! # uint256
+  gasEtherBalance: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CreateCollectionStakeEthAmountSet @entity(immutable: true) {
+  id: Bytes!
+  caller: Bytes! # address
+  prevMaxBaseRoyalty: BigInt! # uint32
+  newMaxBaseRoyalty: BigInt! # uint32
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DerivedNFTInitialized @entity(immutable: true) {
+  id: Bytes!
+  collectionId: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DerivedRuleModuleWhitelisted @entity(immutable: true) {
+  id: Bytes!
+  derivedRuleModule: Bytes! # address
+  whitelist: Boolean! # bool
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type EmergencyAdminSet @entity(immutable: true) {
+  id: Bytes!
+  caller: Bytes! # address
+  oldEmergencyAdmin: Bytes! # address
+  newEmergencyAdmin: Bytes! # address
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FeeModuleBaseConstructed @entity(immutable: true) {
+  id: Bytes!
+  moduleGlobals: Bytes! # address
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type GovernanceSet @entity(immutable: true) {
+  id: Bytes!
+  caller: Bytes! # address
+  prevGovernance: Bytes! # address
+  newGovernance: Bytes! # address
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MaxRoyaltySet @entity(immutable: true) {
+  id: Bytes!
+  caller: Bytes! # address
+  prevMaxBaseRoyalty: BigInt! # uint32
+  newMaxBaseRoyalty: BigInt! # uint32
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ModuleBaseConstructed @entity(immutable: true) {
+  id: Bytes!
+  hub: Bytes! # address
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ModuleGlobalsCurrencyWhitelisted @entity(immutable: true) {
+  id: Bytes!
+  currency: Bytes! # address
+  prevWhitelisted: Boolean! # bool
+  whitelisted: Boolean! # bool
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ModuleGlobalsGovernanceSet @entity(immutable: true) {
+  id: Bytes!
+  prevGovernance: Bytes! # address
+  newGovernance: Bytes! # address
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ModuleGlobalsTreasuryFeeSet @entity(immutable: true) {
+  id: Bytes!
+  prevTreasuryFee: Int! # uint16
+  newTreasuryFee: Int! # uint16
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ModuleGlobalsTreasurySet @entity(immutable: true) {
+  id: Bytes!
+  prevTreasury: Bytes! # address
+  newTreasury: Bytes! # address
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewCollectionCreated @entity(immutable: true) {
+  id: Bytes!
+  collectionOwner: Bytes! # address
+  derivedCollectionAddr: Bytes! # address
+  derivedRuleModule: Bytes! # address
+  collectionId: BigInt! # uint256
+  baseRoyalty: BigInt! # uint256
+  mintLimit: BigInt! # uint256
+  mintExpired: BigInt! # uint256
+  mintPrice: BigInt! # uint256
+  whiteListRootHash: Bytes! # bytes32
+  collInfoURI: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewNFTCreated @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  collectionId: BigInt! # uint256
+  derivedFrom: BigInt! # uint256
+  creator: Bytes! # address
+  nftInfoURI: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RoyaltyDataSet @entity(immutable: true) {
+  id: Bytes!
+  caller: Bytes! # address
+  royaltyAddr: Bytes! # address
+  percentage: BigInt! # uint32
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SetNewRoundReward @entity(immutable: true) {
+  id: Bytes!
+  rewardId: BigInt! # uint256
+  rewardAmount: BigInt! # uint256
+  merkleRoot: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type StakeAndYieldContractAddressSet @entity(immutable: true) {
+  id: Bytes!
+  caller: Bytes! # address
+  prevMaxBaseRoyalty: Bytes! # address
+  newMaxBaseRoyalty: Bytes! # address
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type StateSet @entity(immutable: true) {
+  id: Bytes!
+  caller: Bytes! # address
+  prevState: Int! # uint8
+  newState: Int! # uint8
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
