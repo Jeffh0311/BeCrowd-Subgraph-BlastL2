@@ -2,7 +2,6 @@ type BaseInitialized @entity(immutable: true) {
   id: Bytes!
   name: String! # string
   symbol: String! # string
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -14,7 +13,6 @@ type BurnNFTFromCollection @entity(immutable: true) {
   nftId: BigInt! # uint256
   burner: Bytes! # address
   owner: Bytes! # address
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -42,18 +40,8 @@ type ClaimYieldAndGas @entity(immutable: true) {
 type CreateCollectionStakeEthAmountSet @entity(immutable: true) {
   id: Bytes!
   caller: Bytes! # address
-  prevMaxBaseRoyalty: BigInt! # uint32
-  newMaxBaseRoyalty: BigInt! # uint32
-  timestamp: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type DerivedNFTInitialized @entity(immutable: true) {
-  id: Bytes!
-  collectionId: BigInt! # uint256
-  timestamp: BigInt! # uint256
+  prevStakeEthAmount: BigInt! # uint256
+  newStakeEthAmount: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -63,7 +51,6 @@ type DerivedRuleModuleWhitelisted @entity(immutable: true) {
   id: Bytes!
   derivedRuleModule: Bytes! # address
   whitelist: Boolean! # bool
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -74,16 +61,6 @@ type EmergencyAdminSet @entity(immutable: true) {
   caller: Bytes! # address
   oldEmergencyAdmin: Bytes! # address
   newEmergencyAdmin: Bytes! # address
-  timestamp: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type FeeModuleBaseConstructed @entity(immutable: true) {
-  id: Bytes!
-  moduleGlobals: Bytes! # address
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -94,7 +71,6 @@ type GovernanceSet @entity(immutable: true) {
   caller: Bytes! # address
   prevGovernance: Bytes! # address
   newGovernance: Bytes! # address
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -105,16 +81,6 @@ type MaxRoyaltySet @entity(immutable: true) {
   caller: Bytes! # address
   prevMaxBaseRoyalty: BigInt! # uint32
   newMaxBaseRoyalty: BigInt! # uint32
-  timestamp: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type ModuleBaseConstructed @entity(immutable: true) {
-  id: Bytes!
-  hub: Bytes! # address
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -125,7 +91,6 @@ type ModuleGlobalsCurrencyWhitelisted @entity(immutable: true) {
   currency: Bytes! # address
   prevWhitelisted: Boolean! # bool
   whitelisted: Boolean! # bool
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -135,7 +100,6 @@ type ModuleGlobalsGovernanceSet @entity(immutable: true) {
   id: Bytes!
   prevGovernance: Bytes! # address
   newGovernance: Bytes! # address
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -145,7 +109,6 @@ type ModuleGlobalsTreasuryFeeSet @entity(immutable: true) {
   id: Bytes!
   prevTreasuryFee: Int! # uint16
   newTreasuryFee: Int! # uint16
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -155,7 +118,6 @@ type ModuleGlobalsTreasurySet @entity(immutable: true) {
   id: Bytes!
   prevTreasury: Bytes! # address
   newTreasury: Bytes! # address
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -206,7 +168,6 @@ type RoyaltyDataSet @entity(immutable: true) {
   caller: Bytes! # address
   royaltyAddr: Bytes! # address
   percentage: BigInt! # uint32
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -225,9 +186,8 @@ type SetNewRoundReward @entity(immutable: true) {
 type StakeAndYieldContractAddressSet @entity(immutable: true) {
   id: Bytes!
   caller: Bytes! # address
-  prevMaxBaseRoyalty: Bytes! # address
-  newMaxBaseRoyalty: Bytes! # address
-  timestamp: BigInt! # uint256
+  prevStakeAndYieldContractAddress: Bytes! # address
+  newStakeAndYieldContractAddress: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -238,7 +198,6 @@ type StateSet @entity(immutable: true) {
   caller: Bytes! # address
   prevState: Int! # uint8
   newState: Int! # uint8
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

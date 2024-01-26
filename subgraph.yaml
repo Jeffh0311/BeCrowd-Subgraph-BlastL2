@@ -8,9 +8,9 @@ dataSources:
     name: BeCrowdHub
     network: blast-testnet
     source:
-      address: "0x4308526523E349633068B22b062A4Ad5b5fb7989"
+      address: "0xa5c075bDB92eAD4DB870b1009ED475578B765433"
       abi: BeCrowdHub
-      startBlock: 778510
+      startBlock: 791120
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -21,13 +21,10 @@ dataSources:
         - ClaimStakeEth
         - ClaimYieldAndGas
         - CreateCollectionStakeEthAmountSet
-        - DerivedNFTInitialized
         - DerivedRuleModuleWhitelisted
         - EmergencyAdminSet
-        - FeeModuleBaseConstructed
         - GovernanceSet
         - MaxRoyaltySet
-        - ModuleBaseConstructed
         - ModuleGlobalsCurrencyWhitelisted
         - ModuleGlobalsGovernanceSet
         - ModuleGlobalsTreasuryFeeSet
@@ -42,48 +39,42 @@ dataSources:
         - name: BeCrowdHub
           file: ./abis/BeCrowdHub.json
       eventHandlers:
-        - event: BaseInitialized(string,string,uint256)
+        - event: BaseInitialized(string,string)
           handler: handleBaseInitialized
-        - event: BurnNFTFromCollection(uint256,uint256,address,address,uint256)
+        - event: BurnNFTFromCollection(uint256,uint256,address,address)
           handler: handleBurnNFTFromCollection
         - event: ClaimStakeEth(address,uint256)
           handler: handleClaimStakeEth
         - event: ClaimYieldAndGas(address,uint256,uint256)
           handler: handleClaimYieldAndGas
-        - event: CreateCollectionStakeEthAmountSet(indexed address,indexed uint32,indexed uint32,uint256)
+        - event: CreateCollectionStakeEthAmountSet(indexed address,indexed uint256,indexed uint256)
           handler: handleCreateCollectionStakeEthAmountSet
-        - event: DerivedNFTInitialized(indexed uint256,uint256)
-          handler: handleDerivedNFTInitialized
-        - event: DerivedRuleModuleWhitelisted(address,bool,uint256)
+        - event: DerivedRuleModuleWhitelisted(address,bool)
           handler: handleDerivedRuleModuleWhitelisted
-        - event: EmergencyAdminSet(indexed address,indexed address,indexed address,uint256)
+        - event: EmergencyAdminSet(indexed address,indexed address,indexed address)
           handler: handleEmergencyAdminSet
-        - event: FeeModuleBaseConstructed(indexed address,uint256)
-          handler: handleFeeModuleBaseConstructed
-        - event: GovernanceSet(indexed address,indexed address,indexed address,uint256)
+        - event: GovernanceSet(indexed address,indexed address,indexed address)
           handler: handleGovernanceSet
-        - event: MaxRoyaltySet(indexed address,indexed uint32,indexed uint32,uint256)
+        - event: MaxRoyaltySet(indexed address,indexed uint32,indexed uint32)
           handler: handleMaxRoyaltySet
-        - event: ModuleBaseConstructed(indexed address,uint256)
-          handler: handleModuleBaseConstructed
-        - event: ModuleGlobalsCurrencyWhitelisted(indexed address,indexed bool,indexed bool,uint256)
+        - event: ModuleGlobalsCurrencyWhitelisted(indexed address,indexed bool,indexed bool)
           handler: handleModuleGlobalsCurrencyWhitelisted
-        - event: ModuleGlobalsGovernanceSet(indexed address,indexed address,uint256)
+        - event: ModuleGlobalsGovernanceSet(indexed address,indexed address)
           handler: handleModuleGlobalsGovernanceSet
-        - event: ModuleGlobalsTreasuryFeeSet(indexed uint16,indexed uint16,uint256)
+        - event: ModuleGlobalsTreasuryFeeSet(indexed uint16,indexed uint16)
           handler: handleModuleGlobalsTreasuryFeeSet
-        - event: ModuleGlobalsTreasurySet(indexed address,indexed address,uint256)
+        - event: ModuleGlobalsTreasurySet(indexed address,indexed address)
           handler: handleModuleGlobalsTreasurySet
         - event: NewCollectionCreated(indexed address,address,address,uint256,uint256,uint256,uint256,uint256,bytes32,string)
           handler: handleNewCollectionCreated
         - event: NewNFTCreated(indexed uint256,indexed uint256,uint256,address,string)
           handler: handleNewNFTCreated
-        - event: RoyaltyDataSet(indexed address,indexed address,indexed uint32,uint256)
+        - event: RoyaltyDataSet(indexed address,indexed address,indexed uint32)
           handler: handleRoyaltyDataSet
         - event: SetNewRoundReward(uint256,uint256,bytes32)
           handler: handleSetNewRoundReward
-        - event: StakeAndYieldContractAddressSet(indexed address,indexed address,indexed address,uint256)
+        - event: StakeAndYieldContractAddressSet(indexed address,indexed address,indexed address)
           handler: handleStakeAndYieldContractAddressSet
-        - event: StateSet(indexed address,indexed uint8,indexed uint8,uint256)
+        - event: StateSet(indexed address,indexed uint8,indexed uint8)
           handler: handleStateSet
       file: ./src/be-crowd-hub.ts

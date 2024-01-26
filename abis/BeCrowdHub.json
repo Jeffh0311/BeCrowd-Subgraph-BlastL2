@@ -13,12 +13,6 @@
         "internalType": "string",
         "name": "symbol",
         "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "BaseInitialized",
@@ -50,12 +44,6 @@
         "internalType": "address",
         "name": "owner",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "BurnNFTFromCollection",
@@ -116,43 +104,18 @@
       },
       {
         "indexed": true,
-        "internalType": "uint32",
-        "name": "prevMaxBaseRoyalty",
-        "type": "uint32"
+        "internalType": "uint256",
+        "name": "prevStakeEthAmount",
+        "type": "uint256"
       },
       {
         "indexed": true,
-        "internalType": "uint32",
-        "name": "newMaxBaseRoyalty",
-        "type": "uint32"
-      },
-      {
-        "indexed": false,
         "internalType": "uint256",
-        "name": "timestamp",
+        "name": "newStakeEthAmount",
         "type": "uint256"
       }
     ],
     "name": "CreateCollectionStakeEthAmountSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "collectionId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      }
-    ],
-    "name": "DerivedNFTInitialized",
     "type": "event"
   },
   {
@@ -169,12 +132,6 @@
         "internalType": "bool",
         "name": "whitelist",
         "type": "bool"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "DerivedRuleModuleWhitelisted",
@@ -200,34 +157,9 @@
         "internalType": "address",
         "name": "newEmergencyAdmin",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "EmergencyAdminSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "moduleGlobals",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      }
-    ],
-    "name": "FeeModuleBaseConstructed",
     "type": "event"
   },
   {
@@ -250,12 +182,6 @@
         "internalType": "address",
         "name": "newGovernance",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "GovernanceSet",
@@ -281,34 +207,9 @@
         "internalType": "uint32",
         "name": "newMaxBaseRoyalty",
         "type": "uint32"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "MaxRoyaltySet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "hub",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      }
-    ],
-    "name": "ModuleBaseConstructed",
     "type": "event"
   },
   {
@@ -331,12 +232,6 @@
         "internalType": "bool",
         "name": "whitelisted",
         "type": "bool"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "ModuleGlobalsCurrencyWhitelisted",
@@ -356,12 +251,6 @@
         "internalType": "address",
         "name": "newGovernance",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "ModuleGlobalsGovernanceSet",
@@ -381,12 +270,6 @@
         "internalType": "uint16",
         "name": "newTreasuryFee",
         "type": "uint16"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "ModuleGlobalsTreasuryFeeSet",
@@ -406,12 +289,6 @@
         "internalType": "address",
         "name": "newTreasury",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "ModuleGlobalsTreasurySet",
@@ -541,12 +418,6 @@
         "internalType": "uint32",
         "name": "percentage",
         "type": "uint32"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "RoyaltyDataSet",
@@ -589,20 +460,14 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "prevMaxBaseRoyalty",
+        "name": "prevStakeAndYieldContractAddress",
         "type": "address"
       },
       {
         "indexed": true,
         "internalType": "address",
-        "name": "newMaxBaseRoyalty",
+        "name": "newStakeAndYieldContractAddress",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "StakeAndYieldContractAddressSet",
@@ -628,12 +493,6 @@
         "internalType": "enum DataTypes.State",
         "name": "newState",
         "type": "uint8"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
       }
     ],
     "name": "StateSet",

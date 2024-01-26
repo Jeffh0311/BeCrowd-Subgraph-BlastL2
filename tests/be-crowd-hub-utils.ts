@@ -6,13 +6,10 @@ import {
   ClaimStakeEth,
   ClaimYieldAndGas,
   CreateCollectionStakeEthAmountSet,
-  DerivedNFTInitialized,
   DerivedRuleModuleWhitelisted,
   EmergencyAdminSet,
-  FeeModuleBaseConstructed,
   GovernanceSet,
   MaxRoyaltySet,
-  ModuleBaseConstructed,
   ModuleGlobalsCurrencyWhitelisted,
   ModuleGlobalsGovernanceSet,
   ModuleGlobalsTreasuryFeeSet,
@@ -176,32 +173,6 @@ export function createCreateCollectionStakeEthAmountSetEvent(
   return createCollectionStakeEthAmountSetEvent
 }
 
-export function createDerivedNFTInitializedEvent(
-  collectionId: BigInt,
-  timestamp: BigInt
-): DerivedNFTInitialized {
-  let derivedNftInitializedEvent = changetype<DerivedNFTInitialized>(
-    newMockEvent()
-  )
-
-  derivedNftInitializedEvent.parameters = new Array()
-
-  derivedNftInitializedEvent.parameters.push(
-    new ethereum.EventParam(
-      "collectionId",
-      ethereum.Value.fromUnsignedBigInt(collectionId)
-    )
-  )
-  derivedNftInitializedEvent.parameters.push(
-    new ethereum.EventParam(
-      "timestamp",
-      ethereum.Value.fromUnsignedBigInt(timestamp)
-    )
-  )
-
-  return derivedNftInitializedEvent
-}
-
 export function createDerivedRuleModuleWhitelistedEvent(
   derivedRuleModule: Address,
   whitelist: boolean,
@@ -264,32 +235,6 @@ export function createEmergencyAdminSetEvent(
   )
 
   return emergencyAdminSetEvent
-}
-
-export function createFeeModuleBaseConstructedEvent(
-  moduleGlobals: Address,
-  timestamp: BigInt
-): FeeModuleBaseConstructed {
-  let feeModuleBaseConstructedEvent = changetype<FeeModuleBaseConstructed>(
-    newMockEvent()
-  )
-
-  feeModuleBaseConstructedEvent.parameters = new Array()
-
-  feeModuleBaseConstructedEvent.parameters.push(
-    new ethereum.EventParam(
-      "moduleGlobals",
-      ethereum.Value.fromAddress(moduleGlobals)
-    )
-  )
-  feeModuleBaseConstructedEvent.parameters.push(
-    new ethereum.EventParam(
-      "timestamp",
-      ethereum.Value.fromUnsignedBigInt(timestamp)
-    )
-  )
-
-  return feeModuleBaseConstructedEvent
 }
 
 export function createGovernanceSetEvent(
@@ -360,29 +305,6 @@ export function createMaxRoyaltySetEvent(
   )
 
   return maxRoyaltySetEvent
-}
-
-export function createModuleBaseConstructedEvent(
-  hub: Address,
-  timestamp: BigInt
-): ModuleBaseConstructed {
-  let moduleBaseConstructedEvent = changetype<ModuleBaseConstructed>(
-    newMockEvent()
-  )
-
-  moduleBaseConstructedEvent.parameters = new Array()
-
-  moduleBaseConstructedEvent.parameters.push(
-    new ethereum.EventParam("hub", ethereum.Value.fromAddress(hub))
-  )
-  moduleBaseConstructedEvent.parameters.push(
-    new ethereum.EventParam(
-      "timestamp",
-      ethereum.Value.fromUnsignedBigInt(timestamp)
-    )
-  )
-
-  return moduleBaseConstructedEvent
 }
 
 export function createModuleGlobalsCurrencyWhitelistedEvent(

@@ -5,13 +5,10 @@ import {
   ClaimStakeEth as ClaimStakeEthEvent,
   ClaimYieldAndGas as ClaimYieldAndGasEvent,
   CreateCollectionStakeEthAmountSet as CreateCollectionStakeEthAmountSetEvent,
-  DerivedNFTInitialized as DerivedNFTInitializedEvent,
   DerivedRuleModuleWhitelisted as DerivedRuleModuleWhitelistedEvent,
   EmergencyAdminSet as EmergencyAdminSetEvent,
-  FeeModuleBaseConstructed as FeeModuleBaseConstructedEvent,
   GovernanceSet as GovernanceSetEvent,
   MaxRoyaltySet as MaxRoyaltySetEvent,
-  ModuleBaseConstructed as ModuleBaseConstructedEvent,
   ModuleGlobalsCurrencyWhitelisted as ModuleGlobalsCurrencyWhitelistedEvent,
   ModuleGlobalsGovernanceSet as ModuleGlobalsGovernanceSetEvent,
   ModuleGlobalsTreasuryFeeSet as ModuleGlobalsTreasuryFeeSetEvent,
@@ -30,13 +27,10 @@ import {
   ClaimYieldAndGas,
   CreateCollectionStakeEthAmountSet,
   Creator,
-  DerivedNFTInitialized,
   DerivedRuleModuleWhitelisted,
   EmergencyAdminSet,
-  FeeModuleBaseConstructed,
   GovernanceSet,
   MaxRoyaltySet,
-  ModuleBaseConstructed,
   ModuleGlobalsCurrencyWhitelisted,
   ModuleGlobalsGovernanceSet,
   ModuleGlobalsTreasuryFeeSet,
@@ -55,7 +49,6 @@ export function handleBaseInitialized(event: BaseInitializedEvent): void {
   )
   entity.name = event.params.name
   entity.symbol = event.params.symbol
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -91,7 +84,6 @@ export function handleBurnNFTFromCollection(
   entity.nftId = event.params.nftId
   entity.burner = event.params.burner
   entity.owner = event.params.owner
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -136,25 +128,8 @@ export function handleCreateCollectionStakeEthAmountSet(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.caller = event.params.caller
-  entity.prevMaxBaseRoyalty = event.params.prevMaxBaseRoyalty
-  entity.newMaxBaseRoyalty = event.params.newMaxBaseRoyalty
-  entity.timestamp = event.params.timestamp
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleDerivedNFTInitialized(
-  event: DerivedNFTInitializedEvent
-): void {
-  let entity = new DerivedNFTInitialized(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.collectionId = event.params.collectionId
-  entity.timestamp = event.params.timestamp
+  entity.prevStakeEthAmount = event.params.prevStakeEthAmount
+  entity.newStakeEthAmount = event.params.newStakeEthAmount
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -171,7 +146,6 @@ export function handleDerivedRuleModuleWhitelisted(
   )
   entity.derivedRuleModule = event.params.derivedRuleModule
   entity.whitelist = event.params.whitelist
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -187,23 +161,6 @@ export function handleEmergencyAdminSet(event: EmergencyAdminSetEvent): void {
   entity.caller = event.params.caller
   entity.oldEmergencyAdmin = event.params.oldEmergencyAdmin
   entity.newEmergencyAdmin = event.params.newEmergencyAdmin
-  entity.timestamp = event.params.timestamp
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleFeeModuleBaseConstructed(
-  event: FeeModuleBaseConstructedEvent
-): void {
-  let entity = new FeeModuleBaseConstructed(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.moduleGlobals = event.params.moduleGlobals
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -219,7 +176,6 @@ export function handleGovernanceSet(event: GovernanceSetEvent): void {
   entity.caller = event.params.caller
   entity.prevGovernance = event.params.prevGovernance
   entity.newGovernance = event.params.newGovernance
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -235,23 +191,6 @@ export function handleMaxRoyaltySet(event: MaxRoyaltySetEvent): void {
   entity.caller = event.params.caller
   entity.prevMaxBaseRoyalty = event.params.prevMaxBaseRoyalty
   entity.newMaxBaseRoyalty = event.params.newMaxBaseRoyalty
-  entity.timestamp = event.params.timestamp
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleModuleBaseConstructed(
-  event: ModuleBaseConstructedEvent
-): void {
-  let entity = new ModuleBaseConstructed(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.hub = event.params.hub
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -269,7 +208,6 @@ export function handleModuleGlobalsCurrencyWhitelisted(
   entity.currency = event.params.currency
   entity.prevWhitelisted = event.params.prevWhitelisted
   entity.whitelisted = event.params.whitelisted
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -286,7 +224,6 @@ export function handleModuleGlobalsGovernanceSet(
   )
   entity.prevGovernance = event.params.prevGovernance
   entity.newGovernance = event.params.newGovernance
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -303,7 +240,6 @@ export function handleModuleGlobalsTreasuryFeeSet(
   )
   entity.prevTreasuryFee = event.params.prevTreasuryFee
   entity.newTreasuryFee = event.params.newTreasuryFee
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -320,7 +256,6 @@ export function handleModuleGlobalsTreasurySet(
   )
   entity.prevTreasury = event.params.prevTreasury
   entity.newTreasury = event.params.newTreasury
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -401,7 +336,6 @@ export function handleRoyaltyDataSet(event: RoyaltyDataSetEvent): void {
   entity.caller = event.params.caller
   entity.royaltyAddr = event.params.royaltyAddr
   entity.percentage = event.params.percentage
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -432,9 +366,8 @@ export function handleStakeAndYieldContractAddressSet(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.caller = event.params.caller
-  entity.prevMaxBaseRoyalty = event.params.prevMaxBaseRoyalty
-  entity.newMaxBaseRoyalty = event.params.newMaxBaseRoyalty
-  entity.timestamp = event.params.timestamp
+  entity.prevStakeAndYieldContractAddress = event.params.prevStakeAndYieldContractAddress
+  entity.newStakeAndYieldContractAddress = event.params.newStakeAndYieldContractAddress
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -450,7 +383,6 @@ export function handleStateSet(event: StateSetEvent): void {
   entity.caller = event.params.caller
   entity.prevState = event.params.prevState
   entity.newState = event.params.newState
-  entity.timestamp = event.params.timestamp
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
