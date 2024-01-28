@@ -318,13 +318,12 @@ export function handleNewNFTCreated(event: NewNFTCreatedEvent): void {
   entity.tokenId = event.params.tokenId
   entity.collectionId = event.params.collectionId
   entity.derivedFrom = event.params.derivedFrom
-  entity.creator = account.id
+  entity.creator = event.params.creator
   entity.nftInfoURI = event.params.nftInfoURI
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
-  entity.collection = collection.id
 
   entity.save()
 }

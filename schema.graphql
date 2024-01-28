@@ -139,7 +139,6 @@ type NewCollectionCreated @entity {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
   items: BigInt!
-  nfts: [NewNFTCreated!]! @derivedFrom(field: "collection")
 }
 
 type NewNFTCreated @entity {
@@ -147,20 +146,17 @@ type NewNFTCreated @entity {
   tokenId: BigInt! # uint256
   collectionId: BigInt! # uint256
   derivedFrom: BigInt! # uint256
-  creator: Creator! # address
+  creator: Bytes! # address
   nftInfoURI: String! # string
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
-  collection: NewCollectionCreated!
 }
 
 type Creator @entity {
   id: Bytes!
   address: Bytes!
-  itemsCollection: BigInt!
   itemsNFT: BigInt!
-  nfts: [NewNFTCreated!]! @derivedFrom(field: "creator")
 }
 
 type RoyaltyDataSet @entity(immutable: true) {
