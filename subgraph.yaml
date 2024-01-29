@@ -65,9 +65,9 @@ dataSources:
           handler: handleModuleGlobalsTreasuryFeeSet
         - event: ModuleGlobalsTreasurySet(indexed address,indexed address)
           handler: handleModuleGlobalsTreasurySet
-        - event: NewCollectionCreated(indexed address,address,address,uint256,uint256,uint256,uint256,uint256,bytes32,string)
+        - event: NewCollectionCreated(indexed address,address,address,uint256,uint256,uint256,uint256,uint256,bytes32,string,string)
           handler: handleNewCollectionCreated
-        - event: NewNFTCreated(indexed uint256,indexed uint256,uint256,address,string)
+        - event: NewNFTCreated(indexed uint256,indexed uint256,uint256,address,address,string)
           handler: handleNewNFTCreated
         - event: RoyaltyDataSet(indexed address,indexed address,indexed uint32)
           handler: handleRoyaltyDataSet

@@ -356,6 +356,12 @@
         "internalType": "string",
         "name": "collInfoURI",
         "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
       }
     ],
     "name": "NewCollectionCreated",
@@ -381,6 +387,12 @@
         "internalType": "uint256",
         "name": "derivedFrom",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "collectionAddr",
+        "type": "address"
       },
       {
         "indexed": false,

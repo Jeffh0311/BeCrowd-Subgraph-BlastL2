@@ -280,6 +280,7 @@ export function handleNewCollectionCreated(
   entity.mintPrice = event.params.mintPrice
   entity.whiteListRootHash = event.params.whiteListRootHash
   entity.collInfoURI = event.params.collInfoURI
+  entity.name = event.params.name;
   entity.items = BigInt.fromI32(0);
 
   entity.blockNumber = event.block.number
@@ -318,6 +319,7 @@ export function handleNewNFTCreated(event: NewNFTCreatedEvent): void {
   entity.tokenId = event.params.tokenId
   entity.collectionId = event.params.collectionId
   entity.derivedFrom = event.params.derivedFrom
+  entity.collectionAddr = event.params.collectionAddr
   entity.creator = event.params.creator
   entity.nftInfoURI = event.params.nftInfoURI
 

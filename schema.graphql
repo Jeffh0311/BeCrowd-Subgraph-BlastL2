@@ -135,10 +135,11 @@ type NewCollectionCreated @entity {
   mintPrice: BigInt! # uint256
   whiteListRootHash: Bytes! # bytes32
   collInfoURI: String! # string
+  name: String! # string
+  items: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
-  items: BigInt!
 }
 
 type NewNFTCreated @entity {
@@ -146,6 +147,7 @@ type NewNFTCreated @entity {
   tokenId: BigInt! # uint256
   collectionId: BigInt! # uint256
   derivedFrom: BigInt! # uint256
+  collectionAddr: Bytes! # address
   creator: Bytes! # address
   nftInfoURI: String! # string
   blockNumber: BigInt!
