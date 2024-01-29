@@ -8,9 +8,9 @@ dataSources:
     name: BeCrowdHub
     network: blast-testnet
     source:
-      address: "0xa5c075bDB92eAD4DB870b1009ED475578B765433"
+      address: "0x39cB46115d52Bc0D8bf7494E3D5A2b436c9aD63f"
       abi: BeCrowdHub
-      startBlock: 791120
+      startBlock: 913320
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
