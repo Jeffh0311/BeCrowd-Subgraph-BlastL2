@@ -301,16 +301,23 @@ export function handleNewNFTCreated(event: NewNFTCreatedEvent): void {
     account.address = event.params.creator
     account.itemsNFT = BigInt.fromI32(1);
     account.itemsCollection = BigInt.fromI32(1);
-    if(account.detailsCollection == null){
-      account.detailsCollection = [];
+    let collections = account.detailsCollection;
+    if(collections == null){
+      collections = [];
     }
-    account.detailsCollection!.push(event.params.collectionId);
+    collections.push(event.params.collectionId);
+    account.detailsCollection = collections;
   }else{
     account.itemsNFT = account.itemsNFT.plus(BigInt.fromI32(1));
-    let index = account.detailsCollection!.indexOf(event.params.collectionId);
+    let collections = account.detailsCollection;
+    if(collections == null){
+      collections = [];
+    }
+    let index = collections.indexOf(event.params.collectionId);
     if(index == -1){
+      collections.push(event.params.collectionId);
       account.itemsCollection = account.itemsCollection.plus(BigInt.fromI32(1));
-      account.detailsCollection!.push(event.params.collectionId);
+      account.detailsCollection = collections;
     }
   }
   account.save()
