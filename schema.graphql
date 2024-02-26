@@ -159,6 +159,8 @@ type Creator @entity {
   id: Bytes!
   address: Bytes!
   itemsNFT: BigInt!
+  itemsCollection: BigInt!
+  detailsCollection: [BigInt!]
 }
 
 type RoyaltyDataSet @entity(immutable: true) {

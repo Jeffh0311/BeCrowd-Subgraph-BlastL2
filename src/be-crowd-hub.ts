@@ -300,8 +300,18 @@ export function handleNewNFTCreated(event: NewNFTCreatedEvent): void {
     )
     account.address = event.params.creator
     account.itemsNFT = BigInt.fromI32(1);
+    account.itemsCollection = BigInt.fromI32(1);
+    if(account.detailsCollection == null){
+      account.detailsCollection = [];
+    }
+    account.detailsCollection!.push(event.params.collectionId);
   }else{
     account.itemsNFT = account.itemsNFT.plus(BigInt.fromI32(1));
+    let index = account.detailsCollection!.indexOf(event.params.collectionId);
+    if(index == -1){
+      account.itemsCollection = account.itemsCollection.plus(BigInt.fromI32(1));
+      account.detailsCollection!.push(event.params.collectionId);
+    }
   }
   account.save()
 
