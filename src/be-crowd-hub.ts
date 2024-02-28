@@ -350,6 +350,7 @@ export function handleNewNFTCreated(event: NewNFTCreatedEvent): void {
   let projectInfo = ProjectInfo.load(Bytes.fromUTF8("BeCrowd"))
   if(projectInfo != null){
     projectInfo.totalNFTNum = projectInfo.totalNFTNum.plus(BigInt.fromI32(1));
+    projectInfo.totalTx =  projectInfo.totalTx.plus(BigInt.fromI32(1));
     if(bNewCreator){
       projectInfo.creatorsNum = projectInfo.creatorsNum.plus(BigInt.fromI32(1));
     }
