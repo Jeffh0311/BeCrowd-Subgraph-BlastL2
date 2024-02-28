@@ -163,6 +163,14 @@ type Creator @entity {
   detailsCollection: [BigInt!]
 }
 
+type ProjectInfo @entity {
+  id: Bytes!
+  creatorsNum: BigInt!
+  totalTx: BigInt!
+  totalNFTNum: BigInt!
+  totalCollectioinNum: BigInt!
+}
+
 type RoyaltyDataSet @entity(immutable: true) {
   id: Bytes!
   caller: Bytes! # address

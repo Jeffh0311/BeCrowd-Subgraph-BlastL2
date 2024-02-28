@@ -37,6 +37,7 @@ import {
   ModuleGlobalsTreasurySet,
   NewCollectionCreated,
   NewNFTCreated,
+  ProjectInfo,
   RoyaltyDataSet,
   SetNewRoundReward,
   StakeAndYieldContractAddressSet,
@@ -288,13 +289,29 @@ export function handleNewCollectionCreated(
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  let projectInfo = ProjectInfo.load(Bytes.fromUTF8("BeCrowd"))
+  if(projectInfo == null){
+    projectInfo = new ProjectInfo(
+      Bytes.fromUTF8("BeCrowd")
+    )
+    projectInfo.totalCollectioinNum = BigInt.fromI32(1);
+    projectInfo.totalTx = BigInt.fromI32(1);
+    projectInfo.totalNFTNum = BigInt.fromI32(0);
+    projectInfo.creatorsNum = BigInt.fromI32(0);
+  }else{
+    projectInfo.totalCollectioinNum =  projectInfo.totalCollectioinNum.plus(BigInt.fromI32(1));
+    projectInfo.totalTx =  projectInfo.totalTx.plus(BigInt.fromI32(1));
+  }
+  projectInfo.save();
 }
 
 export function handleNewNFTCreated(event: NewNFTCreatedEvent): void {
 
   let account = Creator.load(event.params.creator)
-
+  let bNewCreator = false;
   if (account == null) {
+    bNewCreator = true;
     account = new Creator(
       event.params.creator
     )
@@ -329,6 +346,15 @@ export function handleNewNFTCreated(event: NewNFTCreatedEvent): void {
   }
   collection.items = collection.items.plus(BigInt.fromI32(1))
   collection.save()
+
+  let projectInfo = ProjectInfo.load(Bytes.fromUTF8("BeCrowd"))
+  if(projectInfo != null){
+    projectInfo.totalNFTNum = projectInfo.totalNFTNum.plus(BigInt.fromI32(1));
+    if(bNewCreator){
+      projectInfo.creatorsNum = projectInfo.creatorsNum.plus(BigInt.fromI32(1));
+    }
+    projectInfo.save();
+  }
 
   let entity = new NewNFTCreated(
     Bytes.fromUint8Array(event.params.collectionId).concat(Bytes.fromUint8Array(event.params.tokenId))
