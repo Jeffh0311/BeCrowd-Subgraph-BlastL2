@@ -1,8 +1,8 @@
 {
   "blast-testnet": {
     "BeCrowdHub": {
-      "address": "0x604DB0da786B9Ce71069cdbEd17Ad204b4921E0F",
-      "startBlock": 1140680
+      "address": "0x93A15CeC32f45A988781A61aD9656a0AE547e2aF",
+      "startBlock": 2131770
     }
   }
 }

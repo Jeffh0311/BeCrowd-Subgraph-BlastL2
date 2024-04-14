@@ -298,6 +298,9 @@ export function handleNewCollectionCreated(
     )
     account.address = event.params.collectionOwner
     account.itemsCreateCollection = BigInt.fromI32(1);
+    account.itemsNFT = BigInt.fromI32(0);
+    account.itemsCollection = BigInt.fromI32(0);
+    account.detailsCollection = [];
   }else{
     account.itemsCreateCollection = account.itemsCreateCollection.plus(BigInt.fromI32(1));
   }
@@ -329,6 +332,7 @@ export function handleNewNFTCreated(event: NewNFTCreatedEvent): void {
       event.params.creator
     )
     account.address = event.params.creator
+    account.itemsCreateCollection = BigInt.fromI32(0);
     account.itemsNFT = BigInt.fromI32(1);
     account.itemsCollection = BigInt.fromI32(1);
     let collections = account.detailsCollection;
