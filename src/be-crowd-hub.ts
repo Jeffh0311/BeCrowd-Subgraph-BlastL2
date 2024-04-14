@@ -292,7 +292,9 @@ export function handleNewCollectionCreated(
   entity.save()
 
   let account = Creator.load(event.params.collectionOwner)
+  let bNewCreator = false;
   if (account == null) {
+    bNewCreator = true;
     account = new Creator(
       event.params.collectionOwner
     )
@@ -314,10 +316,13 @@ export function handleNewCollectionCreated(
     projectInfo.totalCollectioinNum = BigInt.fromI32(1);
     projectInfo.totalTx = BigInt.fromI32(1);
     projectInfo.totalNFTNum = BigInt.fromI32(0);
-    projectInfo.creatorsNum = BigInt.fromI32(0);
+    projectInfo.creatorsNum = BigInt.fromI32(1);
   }else{
     projectInfo.totalCollectioinNum =  projectInfo.totalCollectioinNum.plus(BigInt.fromI32(1));
     projectInfo.totalTx =  projectInfo.totalTx.plus(BigInt.fromI32(1));
+    if(bNewCreator){
+      projectInfo.creatorsNum = projectInfo.creatorsNum.plus(BigInt.fromI32(1));
+    }
   }
   projectInfo.save();
 }
