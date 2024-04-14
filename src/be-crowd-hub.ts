@@ -274,6 +274,7 @@ export function handleNewCollectionCreated(
   entity.collectionOwner = event.params.collectionOwner
   entity.derivedCollectionAddr = event.params.derivedCollectionAddr
   entity.derivedRuleModule = event.params.derivedRuleModule
+  entity.currency = event.params.currency
   entity.collectionId = event.params.collectionId
   entity.baseRoyalty = event.params.baseRoyalty
   entity.mintLimit = event.params.mintLimit
@@ -289,6 +290,18 @@ export function handleNewCollectionCreated(
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  let account = Creator.load(event.params.collectionOwner)
+  if (account == null) {
+    account = new Creator(
+      event.params.collectionOwner
+    )
+    account.address = event.params.collectionOwner
+    account.itemsCreateCollection = BigInt.fromI32(1);
+  }else{
+    account.itemsCreateCollection = account.itemsCreateCollection.plus(BigInt.fromI32(1));
+  }
+  account.save()
 
   let projectInfo = ProjectInfo.load(Bytes.fromUTF8("BeCrowd"))
   if(projectInfo == null){

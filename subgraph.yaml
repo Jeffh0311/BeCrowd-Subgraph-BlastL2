@@ -8,9 +8,9 @@ dataSources:
     name: BeCrowdHub
     network: blast-testnet
     source:
-      address: "0x604DB0da786B9Ce71069cdbEd17Ad204b4921E0F"
+      address: "0x2BadE7d09F0f19C966BCF2D1D57F7C34B045B0b0"
       abi: BeCrowdHub
-      startBlock: 1140680
+      startBlock: 4100960
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -65,7 +65,7 @@ dataSources:
           handler: handleModuleGlobalsTreasuryFeeSet
         - event: ModuleGlobalsTreasurySet(indexed address,indexed address)
           handler: handleModuleGlobalsTreasurySet
-        - event: NewCollectionCreated(indexed address,address,address,uint256,uint256,uint256,uint256,uint256,bytes32,string,string)
+        - event: NewCollectionCreated(indexed address,address,address,address,uint256,uint256,uint256,uint256,uint256,bytes32,string,string)
           handler: handleNewCollectionCreated
         - event: NewNFTCreated(indexed uint256,indexed uint256,uint256,address,address,string)
           handler: handleNewNFTCreated

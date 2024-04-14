@@ -128,6 +128,7 @@ type NewCollectionCreated @entity {
   collectionOwner: Bytes! # address
   derivedCollectionAddr: Bytes! # address
   derivedRuleModule: Bytes! # address
+  currency: Bytes! # address
   collectionId: BigInt! # uint256
   baseRoyalty: BigInt! # uint256
   mintLimit: BigInt! # uint256
@@ -158,6 +159,7 @@ type NewNFTCreated @entity {
 type Creator @entity {
   id: Bytes!
   address: Bytes!
+  itemsCreateCollection: BigInt!
   itemsNFT: BigInt!
   itemsCollection: BigInt!
   detailsCollection: [BigInt!]
